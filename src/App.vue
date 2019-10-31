@@ -10,9 +10,9 @@
 
       <el-footer>
         <div class="page-icons">
-          <div :class="{home:true,active:footerState===0}"></div>
-          <div :class="{order:true,active:footerState===1}"></div>
-          <div :class="{me:true,active:footerState===2}"></div>
+          <div :class="{home:true,active:footerState===0}" @click="changePage('')"></div>
+          <div :class="{order:true,active:footerState===1}" @click="changePage('order')"></div>
+          <div :class="{me:true,active:footerState===2}" @click="changePage('me')"></div>
         </div>
       </el-footer>
     </el-container>
@@ -28,6 +28,9 @@ export default class App extends Vue {
   }
   get footerState():number{
     return vuex.state.footer.value;
+  }
+  changePage(page:string){
+    this.$router.push(page);
   }
 }
 </script>
