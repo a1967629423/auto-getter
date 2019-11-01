@@ -7,9 +7,12 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "@neushimmer/joi": "^0.0.7-beta1",
+    "@neushimmer/joi": "^0.0.7-beta3",
     "core-js": "^3.3.2",
     "element-ui": "^2.4.5",
+    "pug": "^2.0.4",
+    "pug-parser": "^5.0.1",
+    "pug-plain-loader": "^1.0.0",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
     "vue-property-decorator": "^8.3.0",

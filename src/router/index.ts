@@ -1,14 +1,37 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-
+import Base from '../views/layout/Base.vue'
+import vuex from '../store'
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: Home,
+    name: 'base',
+    component: Base,
+    children: [
+      {
+        path: '/',
+        component: () => import('../views/Home.vue'),
+        meta:{
+          title:'首页'
+        }
+      },
+      {
+        path: '/order',
+        component: () => import('../views/Order.vue'),
+        meta:{
+          title:'订单'
+        }
+      },
+      {
+        path:'/me',
+        component:()=>import('../views/Me.vue'),
+        meta:{
+          title:'我的'
+        }
+      }
+    ]
 
   },
   {
@@ -20,9 +43,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path:'/order',
-    name:'Order',
-    component:()=>import('../views/Order.vue')
+    path:'*',
+    name:'404',
+    component:()=>import('../views/404Page.vue')
   }
 ]
 
@@ -31,5 +54,10 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-
+router.beforeEach((to,from,next)=>{
+  if(to.meta.title){
+    vuex.dispatch('changeTitle',to.meta.title);
+  }
+  next();
+})
 export default router
