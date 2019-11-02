@@ -43,7 +43,7 @@ export default class Home extends Vue {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #cccc41;
+    background-color: #e6e65b;
     .title{
       display: inline-block;
       vertical-align: middle;

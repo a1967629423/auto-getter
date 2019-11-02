@@ -7,13 +7,13 @@
         el-footer.base-footer
             .warpper
                 router-link(to="/",tag="li")
-                    i(class="fa fa-home") 
+                    i(class="fa fa-home fa-lg") 
                         .linkText 首页
                 router-link(to="/order",tag="li")
-                    i(class="fa fa-list") 
+                    i(class="fa fa-list fa-lg") 
                         .linkText 订单
                 router-link(to="/me",tag="li")
-                    i(class="fa fa-user") 
+                    i(class="fa fa-user fa-lg") 
                         .linkText 我的
 </template>
 <script lang="ts">
@@ -30,10 +30,12 @@ export default class Base extends Vue {
 }
 </script>
 <style lang="scss" scoped>
+@import "../../element-variables";
 .base-container {
   height: 100%;
   .base-content{
       background-color: rgb(240, 240, 240);
+      padding: 0;
   }
   .base-header{
       background-color: rgb(240, 240, 240);
@@ -66,9 +68,10 @@ export default class Base extends Vue {
             color:rgb(115, 105, 91);
             display: inline-block;
             &.router-link-exact-active{
-                i{
-                    text-shadow: 0 0 3px,0 0 6px;
-                }
+                color: $--color-primary * 1.5;
+            }
+            .linkText{
+                font-size: 12px;
             }
         }
     }

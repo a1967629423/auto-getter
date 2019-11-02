@@ -2,7 +2,7 @@ import {Joi, SchemaTypeOf} from '@neushimmer/joi'
 let GetUserInfoSchema = Joi.object({
     success:Joi.boolean().required(),
     data:Joi.object({
-        id:Joi.number().required(),
+        id:Joi.string().required(),
         nickname:Joi.string().required(),
         headimgurl:Joi.string().required(),
         sex:Joi.number(),
@@ -18,7 +18,7 @@ let SiteSchema = Joi.object({
 let FamilySchema = Joi.object({
     name:Joi.string().required(),
     phone:Joi.string().required(),
-    id:Joi.number().required(),
+    id:Joi.string().required(),
     group:Joi.string()
 })
 let OrderSchema = Joi.object({
@@ -36,9 +36,11 @@ let OrderSchema = Joi.object({
     courier:Joi.object({
         name:Joi.string().required(),
         phone:Joi.string().required(),
-        id:Joi.number().required()
+        id:Joi.string().required()
     }),
-    family:FamilySchema
+    family:FamilySchema,
+    id:Joi.string().required(),
+    totalPrice:Joi.number().required()
 })
 let GetOrdersInfoSchema = Joi.object({
     success:Joi.boolean().required(),
