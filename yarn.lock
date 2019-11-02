@@ -775,10 +775,10 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@neushimmer/joi@^0.0.7-beta3":
-  version "0.0.7-beta3"
-  resolved "https://registry.npmjs.org/@neushimmer/joi/-/joi-0.0.7-beta3.tgz#f159b4e4f385ba7af4a09e1b24d1abffb8dccf81"
-  integrity sha512-XNJudJz3adFtd1UYnefvHLtjdNoeKkt/OiWLHTp0ar90B6im55EAyKtL13DCqIAa+H/4CH6Dy4YOpV+6telWcg==
+"@neushimmer/joi@^0.0.7-beta5":
+  version "0.0.7-beta5"
+  resolved "https://registry.yarnpkg.com/@neushimmer/joi/-/joi-0.0.7-beta5.tgz#7dd377c64af9561cb20b2aadc53d06e631461df0"
+  integrity sha512-OB3nTtf7k87iTc2/TELITwPJ1ibevZaqlCIW+QDzQORIIZ0/48lJp0EYabfHZTGIg6reKJjUldGMcGTdCnFLgQ==
   dependencies:
     "@hapi/joi" "16"
     "@types/hapi__joi" "16"

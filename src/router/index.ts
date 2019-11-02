@@ -7,28 +7,28 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'base',
     component: Base,
     children: [
       {
         path: '/',
+        name:'home',
         component: () => import('../views/Home.vue'),
-        meta:{
-          title:'首页'
+        meta: {
+          title: '首页'
         }
       },
       {
         path: '/order',
         component: () => import('../views/Order.vue'),
-        meta:{
-          title:'订单'
+        meta: {
+          title: '订单'
         }
       },
       {
-        path:'/me',
-        component:()=>import('../views/Me.vue'),
-        meta:{
-          title:'我的'
+        path: '/me',
+        component: () => import('../views/Me.vue'),
+        meta: {
+          title: '我的'
         }
       }
     ]
@@ -43,9 +43,24 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path:'*',
-    name:'404',
-    component:()=>import('../views/404Page.vue')
+    path: '/getter',
+    name: 'getter',
+    component: () => import('../views/layout/Getter.vue'),
+    children: [
+      {
+        path: 'create',
+        name: 'createOrder',
+        component:()=>import('../views/getter/CreateOrderForm.vue'),
+        meta:{
+          title:"我要取物"
+        }
+      }
+    ]
+  },
+  {
+    path: '*',
+    name: '404',
+    component: () => import('../views/404Page.vue')
   }
 ]
 
@@ -54,9 +69,9 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-router.beforeEach((to,from,next)=>{
-  if(to.meta.title){
-    vuex.dispatch('changeTitle',to.meta.title);
+router.beforeEach((to, from, next) => {
+  if (to.meta.title) {
+    vuex.dispatch('changeTitle', to.meta.title);
   }
   next();
 })

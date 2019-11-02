@@ -39,7 +39,9 @@ export class FakeServer implements IServer {
                 createdAt:new Date,
                 state:'compleate',
                 id:"0X000001",
-                totalPrice:12
+                totalPrice:12,
+                object:{name:'某个东西',description:''},
+                type:'sf'
             },
         }
     }
@@ -61,8 +63,10 @@ export class FakeServer implements IServer {
                 },
                 createdAt:new Date,
                 state:'compleate',
-                id:"0X000001",
-                totalPrice:12
+                id:"0x000001",
+                totalPrice:12,
+                object:{name:'某个东西',description:''},
+                type:'sf'
             }]
         }
     }

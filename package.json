@@ -7,7 +7,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "@neushimmer/joi": "^0.0.7-beta3",
+    "@neushimmer/joi": "^0.0.7-beta5",
     "core-js": "^3.3.2",
     "element-ui": "^2.4.5",
     "pug": "^2.0.4",

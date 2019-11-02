@@ -1,7 +1,7 @@
 <template lang="pug">
   .home-container
     .background
-    .begin-btn
+    .begin-btn(@click="toGetterForm()")
       .anim-child(v-for="(value,idx) in child" :key="value")
       .title 点击立刻取物
 </template>
@@ -12,6 +12,9 @@ import { Server } from "../service";
 @Component
 export default class Home extends Vue {
   child: number[] = [0, 1, 2];
+  toGetterForm(){
+    this.$router.push({path:'/getter/create'})
+  }
 }
 </script>
 <style lang="scss" scoped>

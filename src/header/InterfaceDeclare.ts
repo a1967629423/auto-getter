@@ -21,6 +21,12 @@ let FamilySchema = Joi.object({
     id:Joi.string().required(),
     group:Joi.string()
 })
+
+let ObjectSchema = Joi.object({
+    name:Joi.string().required(),
+    description:Joi.string().allow('').default(''),
+})
+
 let OrderSchema = Joi.object({
     createdAt:Joi.any().custom((val,help)=>{
         let parsed = Date.parse(val)
@@ -40,7 +46,9 @@ let OrderSchema = Joi.object({
     }),
     family:FamilySchema,
     id:Joi.string().required(),
-    totalPrice:Joi.number().required()
+    totalPrice:Joi.number().required(),
+    object:ObjectSchema.required(),
+    type:Joi.string().valid('sf','bf').required()
 })
 let GetOrdersInfoSchema = Joi.object({
     success:Joi.boolean().required(),
@@ -53,6 +61,7 @@ let CreateOrderSchema = Joi.object({
     from:SiteSchema.required(),
     to:SiteSchema.required(),
     family:FamilySchema.required(),
+    type:Joi.string().valid('sf','bf').required()
 })
 let CreateOrderResultScheam = Joi.object({
     success:Joi.boolean().required(),

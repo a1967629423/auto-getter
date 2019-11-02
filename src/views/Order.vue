@@ -33,7 +33,7 @@
                     span 合计: 
                     .total  {{item.totalPrice}}元
                 .order-call
-                    el-button.call-btn 联系家人
+                    el-button(round,size="mini").call-btn 联系家人
                     
 
 </template>
@@ -220,10 +220,7 @@ export default class Order extends Vue {
           text-align: right;
           .call-btn{
               margin-top: 10px;
-              border-radius: 10px;
               font-size: 0.8em;
-              padding: 6px 10px;
-
           }
       }
     }
