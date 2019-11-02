@@ -8,6 +8,7 @@ function setTimeoutAsync(timeout: number) {
 }
 
 export class FakeServer implements IServer {
+    globalId:number = 0;
     async getUserInfo(id?: string): Promise<GetUserInfo> {
         await setTimeoutAsync(1000);
         return {success:true,data:{
@@ -22,27 +23,22 @@ export class FakeServer implements IServer {
         let { value, error } = CreateOrder.validate(co);
         if (error) throw error;
         console.log(value);
+        let info:CreateOrderResult['data'] = {
+            from: co.from,
+            to:co.to,
+            createdAt:new Date,
+            deadLine:co.deadLine,
+            state:'created',
+            id:`0x${(++this.globalId).toString().padStart(6,'0')}`,
+            totalPrice:12,
+            object:{...co.object},
+            type:'sf'
+        };
+        this.orderList.push(info)
         await setTimeoutAsync(1000);
         return {
             success: true,
-            data: {
-                from: {
-                    name: '家',
-                    detail: '1-1',
-                    siteCodes: [1]
-                },
-                to:{
-                    name:'公司',
-                    detail:'qqq',
-                    siteCodes:[2]
-                },
-                createdAt:new Date,
-                state:'compleate',
-                id:"0X000001",
-                totalPrice:12,
-                object:{name:'某个东西',description:''},
-                type:'sf'
-            },
+            data: info
         }
     }
     orderList:NonNullable<GetOrdersInfo['data']> = []
@@ -50,24 +46,32 @@ export class FakeServer implements IServer {
         await setTimeoutAsync(1000);
         return {
             success:true,
-            data:[{
+            data:[...this.orderList,{
                 from: {
                     name: '家',
                     detail: '1-1',
-                    siteCodes: [1]
+                    siteCodes: ['1']
                 },
                 to:{
                     name:'公司',
                     detail:'qqq',
-                    siteCodes:[2]
+                    siteCodes:['2']
                 },
                 createdAt:new Date,
                 state:'compleate',
                 id:"0x000001",
                 totalPrice:12,
                 object:{name:'某个东西',description:''},
-                type:'sf'
+                type:'sf',
+                deadLine:new Date()
             }]
+        }
+    }
+    async getNearOrder():Promise<GetOrdersInfo>{
+        await setTimeoutAsync(1000);
+        return {
+            success:true,
+            data:[...this.orderList]
         }
     }
 }

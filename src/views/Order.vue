@@ -47,15 +47,21 @@ export default class Order extends Vue {
   filterBtns: { title: string; type: number; state: string }[] = [
     { title: "全部", type: 0, state: "" },
     { title: "待付款", type: 1, state: "created" },
-    { title: "取物中", type: 2, state: "getting" },
-    { title: "运送中", type: 3, state: "transiting" },
-    { title: "已完成", type: 4, state: "compleate" }
+    { title: "待接单", type: 2, state: "payed" },
+    { title: "取物中", type: 3, state: "getting" },
+    { title: "运送中", type: 4, state: "transiting" },
+    { title: "已完成", type: 5, state: "compleate" }
   ];
   activeBtnType: number = 0;
-  getFutureTime(time:Date,add:number){
-      let added = new Date(time.getTime()+add);
-      let addDay = (add>86400000?Math.floor(add/86400000):0)
-      return `${addDay>0?`${addDay}天后`:''}${added.getHours()}:${added.getMinutes().toString().padStart(2,'0').toString().padStart(2,'0')}`
+  getFutureTime(time: Date, add: number) {
+    let added = new Date(time.getTime() + add);
+    let addDay = add > 86400000 ? Math.floor(add / 86400000) : 0;
+    return `${addDay > 0 ? `${addDay}天后` : ""}${added.getHours()}:${added
+      .getMinutes()
+      .toString()
+      .padStart(2, "0")
+      .toString()
+      .padStart(2, "0")}`;
   }
   getStateTitle(state: string) {
     let stateFilter = this.filterBtns.find(v => v.state === state);
@@ -103,6 +109,7 @@ export default class Order extends Vue {
     justify-content: space-around;
     li {
       display: inline-block;
+      font-size: .9em;
       &.active {
         color: scale-color(
           $color: $--color-primary,
@@ -139,89 +146,106 @@ export default class Order extends Vue {
         align-items: center;
         .id {
           flex-grow: 0;
-          color: scale-color($color:$--color-primary, $saturation: 30%, $lightness: -60%);
+          color: scale-color(
+            $color: $--color-primary,
+            $saturation: 30%,
+            $lightness: -60%
+          );
           display: flex;
           flex-direction: row;
           justify-content: center;
           align-items: baseline;
-          *{
-              margin: 0 3px;
+          * {
+            margin: 0 3px;
           }
-          .num{
-              display: inline-block;
-              font-size: 0.7em;
-              vertical-align: middle;
+          .num {
+            display: inline-block;
+            font-size: 0.7em;
+            vertical-align: middle;
           }
         }
         .state {
-            font-weight: 600;
-            font-size: 12px;
-            color: scale-color($color:$--color-primary, $saturation: 20%, $lightness: -10%);
+          font-weight: 600;
+          font-size: 12px;
+          color: scale-color(
+            $color: $--color-primary,
+            $saturation: 20%,
+            $lightness: -10%
+          );
           flex-grow: 0;
         }
       }
-      .order-site-body{
-          display: flex;
-          flex-direction: row;
-          .from-site,.dist-site{
-              width: 20%;
-              font-size: 14px;
-              color: scale-color($color:$--color-primary, $saturation: 30%, $lightness: -60%);
-              .site{
-                  color: rgb(20, 20, 20);
-                  font-weight: 600;
-              }
+      .order-site-body {
+        display: flex;
+        flex-direction: row;
+        .from-site,
+        .dist-site {
+          width: 20%;
+          font-size: 14px;
+          color: scale-color(
+            $color: $--color-primary,
+            $saturation: 30%,
+            $lightness: -60%
+          );
+          .site {
+            color: rgb(20, 20, 20);
+            font-weight: 600;
           }
-          .middle-content{
+        }
+        .middle-content {
+          width: 60%;
+          display: flex;
+          flex-direction: column;
+          .predicted-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            .time {
+              font-size: 24px;
+            }
+          }
+          .arrows-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            .arrows {
+              margin: 0 4px;
+            }
+            .middle-bar {
+              height: 8px;
               width: 60%;
-              display: flex;
-              flex-direction: column;
-              .predicted-container{
-                  display: flex;
-                  flex-direction: row;
-                  justify-content:space-around;
-                  align-items: center;
-                  .time{
-                      font-size: 24px;
-                  }
-              }
-              .arrows-container{
-                  display: flex;
-                  flex-direction: row;
-                  justify-content: center;
-                  align-items: center;
-                  .arrows{
-                      margin:0 4px;
-                  }                  
-                  .middle-bar{
-                      height: 8px;
-                      width: 60%;
-                      border-radius: 4px;
-                      flex-grow: 1;
-                      background-color: scale-color($color:$--color-primary, $saturation: -30%, $lightness: 60%);
-                  }
-              }
+              border-radius: 4px;
+              flex-grow: 1;
+              background-color: scale-color(
+                $color: $--color-primary,
+                $saturation: -30%,
+                $lightness: 60%
+              );
+            }
           }
+        }
       }
-      .order-total-price{
-          display: flex;
-          justify-content: flex-end;
-          align-items: center;
-          margin: 10px 0;
-          span{
-              font-size: 0.8em;
-          }
-          .total{
-              margin-left: 5px;
-              font-size: 0.6em;
-          }
+      .order-total-price {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin: 10px 0;
+        span {
+          font-size: 0.8em;
+        }
+        .total {
+          margin-left: 5px;
+          font-size: 0.6em;
+        }
       }
-      .order-call{
-          text-align: right;
-          .call-btn{
-              margin-top: 10px;
-              font-size: 0.8em;
-          }
+      .order-call {
+        text-align: right;
+        .call-btn {
+          margin-top: 10px;
+          font-size: 0.8em;
+        }
       }
     }
   }

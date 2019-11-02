@@ -12,6 +12,9 @@
                 router-link(to="/order",tag="li")
                     i(class="fa fa-list fa-lg") 
                         .linkText 订单
+                router-link(to="/near",tag="li")
+                    i.fa.fa-map-marker.fa-lg
+                        .linkText 附近
                 router-link(to="/me",tag="li")
                     i(class="fa fa-user fa-lg") 
                         .linkText 我的
@@ -33,49 +36,48 @@ export default class Base extends Vue {
 @import "../../element-variables";
 .base-container {
   height: 100%;
-  .base-content{
-      background-color: rgb(240, 240, 240);
-      padding: 0;
-  }
-  .base-header{
-      background-color: rgb(240, 240, 240);
-      color: rgb(20, 20, 20);
-      font-weight: 800;
-      box-shadow: 0 4px 6px -4px rgba(0,0,0,.4);
-      p{
-          margin: 0;
-          vertical-align: middle;
-          display: inline-block;
-      }
-      &:before{
-          height: 100%;
-          width: 0;
-          display: inline-block;
-          vertical-align: middle;
-          content: '';
-      }
-  }
-  .base-footer{
+  .base-content {
     background-color: rgb(240, 240, 240);
-    box-shadow: 0 -4px 6px -4px rgba(0,0,0,.4);
-    .warpper{
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        li{
-            color:rgb(115, 105, 91);
-            display: inline-block;
-            &.router-link-exact-active{
-                color: $--color-primary * 1.5;
-            }
-            .linkText{
-                font-size: 12px;
-            }
-        }
+    padding: 0;
+  }
+  .base-header {
+    background-color: rgb(240, 240, 240);
+    color: rgb(20, 20, 20);
+    font-weight: 800;
+    box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+    p {
+      margin: 0;
+      vertical-align: middle;
+      display: inline-block;
     }
+    &:before {
+      height: 100%;
+      width: 0;
+      display: inline-block;
+      vertical-align: middle;
+      content: "";
+    }
+  }
+  .base-footer {
+    background-color: rgb(240, 240, 240);
+    box-shadow: 0 -4px 6px -4px rgba(0, 0, 0, 0.4);
+    .warpper {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      li {
+        color: rgb(115, 105, 91);
+        display: inline-block;
+        &.router-link-exact-active {
+          color: $--color-primary * 1.5;
+        }
+        .linkText {
+          font-size: 12px;
+        }
+      }
+    }
+  }
 }
-}
-
 </style>

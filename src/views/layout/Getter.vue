@@ -1,7 +1,7 @@
 <template lang="pug">
     el-container.getter-container
         el-header(height="40px").getter-header
-            i.fa.fa-angle-left.back
+            i(@click="back").fa.fa-angle-left.back
             p {{headerText}}
         el-main.getter-main
             router-view
@@ -13,6 +13,9 @@ import vuex from "../../store";
 export default class GetterLayerout extends Vue {
   get headerText(): string {
     return vuex.state.headerText.value;
+  }
+  back(){
+    this.$router.back();
   }
 }
 </script>

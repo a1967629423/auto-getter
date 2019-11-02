@@ -21,7 +21,7 @@ const routes = [
         path: '/order',
         component: () => import('../views/Order.vue'),
         meta: {
-          title: '订单'
+          title: '订单列表'
         }
       },
       {
@@ -29,6 +29,13 @@ const routes = [
         component: () => import('../views/Me.vue'),
         meta: {
           title: '我的'
+        }
+      },
+      {
+        path:'/near',
+        component:()=>import('../views/NearbyTask.vue'),
+        meta:{
+          title: '附近的订单'
         }
       }
     ]

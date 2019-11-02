@@ -13,7 +13,7 @@ let GetUserInfoSchema = Joi.object({
 let SiteSchema = Joi.object({
     name:Joi.string(),
     detail:Joi.string().required(),
-    siteCodes:Joi.array().items(Joi.number())
+    siteCodes:Joi.array().items(Joi.string())
 })
 let FamilySchema = Joi.object({
     name:Joi.string().required(),
@@ -29,6 +29,14 @@ let ObjectSchema = Joi.object({
 
 let OrderSchema = Joi.object({
     createdAt:Joi.any().custom((val,help)=>{
+        let parsed = Date.parse(val)
+        if(!Number.isNaN(parsed)){
+            return new Date(parsed);
+        }
+        if(help)return help.error('0');
+        throw 'convert error'
+    }).required(),
+    deadLine:Joi.any().custom((val,help)=>{
         let parsed = Date.parse(val)
         if(!Number.isNaN(parsed)){
             return new Date(parsed);
@@ -61,7 +69,9 @@ let CreateOrderSchema = Joi.object({
     from:SiteSchema.required(),
     to:SiteSchema.required(),
     family:FamilySchema.required(),
-    type:Joi.string().valid('sf','bf').required()
+    type:Joi.string().valid('sf','bf').required(),
+    deadLine:Joi.string().required(),
+    object:ObjectSchema.required()
 })
 let CreateOrderResultScheam = Joi.object({
     success:Joi.boolean().required(),
