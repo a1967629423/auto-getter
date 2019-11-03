@@ -14,21 +14,24 @@
                         i.fa.fa-angle-right
                     .state {{getStateTitle(item.state)}}
                 .order-site-body
-                    .from-site
-                        span 取物地:
-                        .site {{item.from.name?item.from.name:item.from.detail}}
-                    .middle-content
-                        .predicted-container
-                            span 预计
-                            .time {{getFutureTime(item.createdAt,1000*60*60*3)}}
-                            span 到达
-                        .arrows-container
-                            i.fa.fa-angle-left.arrows
-                            .middle-bar
-                            i.fa.fa-angle-right.arrows
-                    .dist-site
-                        span 目的地:
-                        .site {{item.to.name?item.to.name:item.to.detail}}
+                  .from-site
+                      span 取物地:
+                      .site {{item.from.name?item.from.name:item.from.detail}}
+                  .middle-content
+                      .predicted-container
+                          span 预计
+                          .time {{getFutureTime(item.createdAt,1000*60*60*3)}}
+                          span 到达
+                      .arrows-container
+                          i.fa.fa-angle-left.arrows
+                          .middle-bar
+                          i.fa.fa-angle-right.arrows
+                  .dist-site
+                      span 目的地:
+                      .site {{item.to.name?item.to.name:item.to.detail}}
+                  .trans-state 当前运送模式:
+                    .state {{getTransState(item.type)}}
+                  
                 .order-total-price
                     span 合计: 
                     .total  {{item.totalPrice}}元
@@ -66,6 +69,16 @@ export default class Order extends Vue {
   getStateTitle(state: string) {
     let stateFilter = this.filterBtns.find(v => v.state === state);
     return stateFilter ? stateFilter.title : "";
+  }
+  transStateMap = {
+    sf:'顺风',
+    bf:'八方'
+  }
+  getTransState(state:'sf'|'bf'){
+    if(state in this.transStateMap){
+      return this.transStateMap[state]
+    }
+    return '';
   }
   get displayOrder(): GetOrdersInfo["data"] {
     if (!this.allOrder) return [];
@@ -139,6 +152,7 @@ export default class Order extends Vue {
     overflow: auto;
     width: 100%;
     .order-card {
+      position: relative;
       .order-header {
         display: flex;
         flex-direction: row;
@@ -225,6 +239,14 @@ export default class Order extends Vue {
               );
             }
           }
+        }
+        .trans-state{
+          position: absolute;
+          left: 0;
+          bottom: 20%;
+          transform: translate(35%);
+          text-align: left;
+          font-size: .9em;
         }
       }
       .order-total-price {

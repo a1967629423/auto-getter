@@ -25,6 +25,7 @@
 import { Vue, Component } from "vue-property-decorator";
 import { CreateOrder, CreateOrderResult } from "../../header/InterfaceDeclare";
 import vuex from '../../store'
+import {Message} from 'element-ui'
 var citys = require("../../header/city/city").default;
 @Component
 export default class CreaateOrderForm extends Vue {
@@ -69,10 +70,10 @@ export default class CreaateOrderForm extends Vue {
     let {value,error} = CreateOrderResult.validate(reuslt);
     if(error){
       console.log(error);
-      this.$message.error('提交失败')
+      Message.error({message:'提交失败',showClose:true});
       return;
     }
-    this.$message({type:'success',message:'提交成功'});
+    Message({type:'success',message:'提交成功',showClose:true})
 
     
   }

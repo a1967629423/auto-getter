@@ -65,7 +65,7 @@ export default new Vuex.Store({
       let reuslt = await server.getNearOrder();
       let {error,value} = GetOrdersInfo.validate(reuslt);
       if(error)return error;
-      ctx.commit('changeNearOrderList',value); 
+      ctx.commit('changeNearOrderList',value.data); 
     },
     async createOrder(ctx,order:CreateOrder){
       let {value,error} = CreateOrder.validate(order)
